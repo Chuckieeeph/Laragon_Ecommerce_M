@@ -1,18 +1,33 @@
-function Navbar() {
+function Navbar({ navItems, currentPage, onNavigate, cartCount }) {
   return (
-    <nav className="navbar">
-      <h2 className="logo">ShopX</h2>
-      <ul>
-        <li>Home</li>
-        <li>Shop</li>
-        <li>Blog</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-      <div className="icons">
-        🔍 🛒 👤
+    <header className="navbar">
+      <div className="brand" onClick={() => onNavigate("Home")}>
+        <span className="brand-dot">SX</span>
+        <div>
+          <h1>ShopX Studio</h1>
+          <p>Modern Everyday Store</p>
+        </div>
       </div>
-    </nav>
+
+      <nav>
+        <ul>
+          {navItems.map((item) => (
+            <li key={item}>
+              <button
+                className={item === currentPage ? "nav-btn active" : "nav-btn"}
+                onClick={() => onNavigate(item)}
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <button className="cart-chip" onClick={() => onNavigate("Shop")}>
+        Cart ({cartCount})
+      </button>
+    </header>
   );
 }
 
